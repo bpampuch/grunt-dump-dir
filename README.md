@@ -1,4 +1,4 @@
-# grunt-dump-dir [![Build Status](https://secure.travis-ci.org/bpampuch/grunt-dump-dir.png?branch=master)](http://travis-ci.org/bpampuch/grunt-dump-dir)
+# grunt-dump-dir [![Build Status](https://secure.travis-ci.org/bpampuch/grunt-dump-dir.png?branch=master)](http://travis-ci.org/bpampuch/grunt-dump-dir) [![NPM version](https://badge.fury.io/js/grunt-dump-dir.png)](http://badge.fury.io/js/grunt-dump-dir)
 
 > Grunt task to dump a dictionary (all files and their content) into a JSON object
 
