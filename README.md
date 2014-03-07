@@ -68,7 +68,7 @@ the output will contain full-path keys:
 
 ```js
 {
- "directory/filename.txt": "base64-encoded-content"
+ "directory/filename.txt": "base64-encoded-content",
  "directory/filename2.jpg": "base64-encoded-content"
 }
 ```
@@ -93,9 +93,8 @@ we'll get the following JSON:
 
 ```js
 {
- "filename.txt": "base64-encoded-content"
+ "filename.txt": "base64-encoded-content",
  "filename2.jpg": "base64-encoded-content"
 }
 ```
-
 
