@@ -1,6 +1,11 @@
-# grunt-dump-dir
+# grunt-dump-dir [![Build Status](https://secure.travis-ci.org/bpampuch/grunt-dump-dir.png?branch=master)](http://travis-ci.org/bpampuch/grunt-dump-dir)
 
 > Grunt task to dump a dictionary (all files and their content) into a JSON object
+
+grunt-dump-dir lets you select a directory and generates a JSON representation with keys being
+filepaths and values - their content encoded in base64.
+
+The main use case for this plugin is *virtual filesystem* generation for browserify projects.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.2`
@@ -17,16 +22,15 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-dump-dir');
 ```
 
-## The "dump_dir" task
+### Dump Dir task
 
-### Overview
 In your project's Gruntfile, add a section named `dump_dir` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
   dump_dir: {
     options: {
-      // Task-specific options go here.
+      // an optional rootPath can be specified here
     },
     your_target: {
       // Target-specific file lists and/or options go here.
@@ -37,53 +41,61 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
+#### options.rootPath
 Type: `String`
-Default value: `',  '`
+Default value: ``
 
-A string value that is used to do something with whatever.
-
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
+A string value which is trimmed from physical path when JSON keys are created.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
-
-```js
-grunt.initConfig({
-  dump_dir: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+If you don't specify `options.rootPath`:
 
 ```js
 grunt.initConfig({
   dump_dir: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
     },
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      'dest.js': [ 'directory/**/*' ]
     },
   },
 });
 ```
 
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+the output will contain full-path keys:
 
-## Release History
-_(Nothing yet)_
+```js
+{
+ "directory/filename.txt": "base64-encoded-content"
+ "directory/filename2.jpg": "base64-encoded-content"
+}
+```
+
+#### RootPath 
+If `rootPath` is provided:
+
+```js
+grunt.initConfig({
+  dump_dir: {
+    options: {
+      'rootPath': 'directory/'
+    },
+    files: {
+      'dest.js': [ 'directory/**/*' ]
+    },
+  },
+});
+```
+
+we'll get the following JSON:
+
+```js
+{
+ "filename.txt": "base64-encoded-content"
+ "filename2.jpg": "base64-encoded-content"
+}
+```
+
+
