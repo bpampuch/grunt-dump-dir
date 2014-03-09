@@ -10,7 +10,10 @@
 
 module.exports = function(grunt) {
   grunt.registerMultiTask('dump_dir', 'Grunt task to dump a dictionary (all files and their content) into a JSON object', function() {
-    var options = this.options({ rootPath: '' });
+    var options = this.options({
+        rootPath: '',
+        pre: 'module.exports = '
+    });
 
     this.files.forEach(function(f) {
       var result = {};
@@ -35,7 +38,7 @@ module.exports = function(grunt) {
         result[key] = new Buffer(grunt.file.read(filepath)).toString('base64');
       });
 
-      grunt.file.write(f.dest, JSON.stringify(result));
+      grunt.file.write(f.dest, options.pre + JSON.stringify(result));
       grunt.log.writeln('File "' + f.dest + '" created.');
     });
 

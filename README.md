@@ -30,7 +30,7 @@ In your project's Gruntfile, add a section named `dump_dir` to the data object p
 grunt.initConfig({
   dump_dir: {
     options: {
-      // an optional rootPath can be specified here
+      // options
     },
     your_target: {
       // Target-specific file lists and/or options go here.
@@ -46,6 +46,15 @@ Type: `String`
 Default value: ``
 
 A string value which is trimmed from physical path when JSON keys are created.
+
+#### options.pre
+Type: string
+Default value: `module.exports = `
+
+String which prefixes generated JSON. Should be used to specify the assignment. The default `module.exports = `
+is not very functional unless the file is used as input to browserify.
+
+Usually you should set it to something like `var myVariable = `
 
 ### Usage Examples
 
@@ -73,7 +82,7 @@ the output will contain full-path keys:
 }
 ```
 
-#### RootPath 
+#### RootPath
 If `rootPath` is provided:
 
 ```js
@@ -97,4 +106,3 @@ we'll get the following JSON:
  "filename2.jpg": "base64-encoded-content"
 }
 ```
-

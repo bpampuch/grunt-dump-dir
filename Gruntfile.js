@@ -45,6 +45,15 @@ module.exports = function(grunt) {
           'tmp/flat2.js': ['test/flatStructure/*'],
         },
       },
+      custom_pre: {
+        options: {
+          rootPath: 'test/flatStructure',
+          pre: 'var variable = '
+        },
+        files: {
+          'tmp/pre.js': ['test/flatStructure/*'],
+        },
+      },
       nlevel_directory: {
         options: {
         },

@@ -1,7 +1,7 @@
 {
   "name": "grunt-dump-dir",
   "description": "Grunt task to dump a dictionary (all files and their content) into a JSON object",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/bpampuch/grunt-dump-dir",
   "author": {
     "name": "Bartek Pampuch",

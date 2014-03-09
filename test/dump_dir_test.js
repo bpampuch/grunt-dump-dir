@@ -45,6 +45,15 @@ exports.dump_dir = {
 
     test.done();
   },
+  custom_pre: function(test) {
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/pre.js');
+    var expected = grunt.file.read('test/expected/pre.js');
+    test.equal(actual, expected);
+
+    test.done();
+  },
   nlevel_directory: function(test) {
     test.expect(1);
 
