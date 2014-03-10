@@ -8,6 +8,8 @@
 
 'use strict';
 
+var fs = require('fs');
+
 module.exports = function(grunt) {
   grunt.registerMultiTask('dump_dir', 'Grunt task to dump a dictionary (all files and their content) into a JSON object', function() {
     var options = this.options({
@@ -35,7 +37,7 @@ module.exports = function(grunt) {
             grunt.warn('rootPath (' + options.rootPath + ') is not root for ' + filepath);
           }
         }
-        result[key] = new Buffer(grunt.file.read(filepath)).toString('base64');
+        result[key] = fs.readFileSync(filepath).toString('base64');
       });
 
       grunt.file.write(f.dest, options.pre + JSON.stringify(result));
